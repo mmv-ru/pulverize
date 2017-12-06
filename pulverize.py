@@ -102,7 +102,7 @@ def render_proc(args, start_frame, end_frame, outdir):
 
 def join_chunks(args, outdir):
     """
-    Concatenate the video chunks together with avconv
+    Concatenate the video chunks together with ffmpeg
     """
     # Which files do we need to join?
     chunk_files = sorted(glob.glob(os.path.join(outdir, 'pulverize_frames_*')))
@@ -116,8 +116,7 @@ def join_chunks(args, outdir):
     outbase, outext = os.path.splitext(os.path.basename(chunk_files[0]))
     outfile = '%s%s' % (filebase, outext)
     log.info("Joining parts into: %s", outfile)
-    params = ['avconv', '-stats', '-f', 'concat',
-            '-safe', '0',
+    params = ['ffmpeg', '-stats', '-f', 'concat',
             '-i', file_list,
             '-c', 'copy', outfile]
     log.debug("avconv params: %s", params)
