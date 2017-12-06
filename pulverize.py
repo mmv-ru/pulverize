@@ -117,6 +117,7 @@ def join_chunks(args, outdir):
     outfile = '%s%s' % (filebase, outext)
     log.info("Joining parts into: %s", outfile)
     params = ['ffmpeg', '-stats', '-f', 'concat',
+            '-safe', '0',
             '-i', file_list,
             '-c', 'copy', outfile]
     log.debug("avconv params: %s", params)
